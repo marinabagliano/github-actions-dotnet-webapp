@@ -26,11 +26,7 @@ jobs:
     - name: Build the webapp
       run: dotnet build **/*.csproj --no-restore
 
-    - name: Run the webapp
-      run: dotnet run --project **/*.csproj
 
-    - name: Open in Browser
-      run: echo "Open the webapp in browser"
 
     - name: Use a pre-existing action
       uses: actions/setup-node@v2
