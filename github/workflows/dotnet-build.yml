@@ -1,0 +1,42 @@
+name: Dotnet Build
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 * * * *' 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup.NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore **/*.csproj
+
+    - name: Build the webapp
+      run: dotnet build **/*.csproj --no-restore
+
+    - name: Run the webapp
+      run: dotnet run --project **/*.csproj
+
+    - name: Open in Browser
+      run: echo "Open the webapp in browser"
+
+    - name: Use a pre-existing action
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Custom Script
+      run: |
+        echo "This is a custom script"
+        
